@@ -21,17 +21,17 @@
                 </thead>
                 <tbody>
                     
-                    {{-- @foreach ($menus as $key => $menu)
+                    @foreach ($menu as $item)
                     <tr>
-                        <td>{{ $key + 1 }}</td>
-                        <td>{{ $menu->name }}</td>
-                        <td>{{ $menu->content }}</td>
-                        <td>{{ $menu->type }}</td>
-                        <td>{{ $menu->price }}</td>
-                        <td>{{ $store->first()->name }}</td>
+                        <td>{{ $item->id}}</td>
+                        <td>{{ $item->name}}</td>
+                        <td>{{ $item->content }}</td>
+                        <td>{{ $item->type }}</td>
+                        <td>{{ $item->price }}</td>
+                        <td>{{ $woocomerce->name }}</td>
                         
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

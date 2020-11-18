@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Automattic\WooCommerce\Client;
 use App\Models\Woocomerce;
+use App\Models\Menu;
 
 
 class menuController extends Controller
@@ -37,15 +38,30 @@ class menuController extends Controller
                 $web->consumer_secret,
                 [
                     'wp_api' => true,
-                    'version' => 'wc/v3'
+                    'version' => 'wc/v3',
+                    'query_string_auth' => true 
                 ]
             );
+            $products  = $woo->get('products');
+    
+            foreach($products as $product){
+                
+                $menu =  new menu();
+                
+                $menu->product_id = $product->id;
+                $menu->name = $product->name;
+                $menu->price = $product->price;
+                $menu->content = strip_tags($product->description);
+                $menu->type = $product->type;
+                $menu->product_parent_id = $product->parent_id;
+                $menu->created_at = $product->date_created;
+                $menu->updated_at = $product->date_modified;  
+                // $menu->website_id = $website->id; 
+                $menu->save();
+              
+            }
         }
-        
-        dd($woo);
-
         return view('menu.edit',compact('store'));
-
     }
 
     /**
@@ -80,8 +96,10 @@ class menuController extends Controller
     {
 
         $woocomerce = \App\Models\Woocomerce::find($id);
-
-        return view('menu.edit');
+        // dd($woocomerce);
+        $menu = \App\Models\menu::all();
+      
+        return view('menu.edit',compact('menu','woocomerce'));
     }
 
     /**
