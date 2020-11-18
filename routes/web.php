@@ -22,6 +22,12 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/website', [App\Http\Controllers\woocomerController::class, 'index'])->name('website');
 
-Route::post('/w', [App\Http\Controllers\woocomerController::class, 'store'])->name('website');
+// Route::get('/website', [App\Http\Controllers\woocomerController::class, 'index'])->name('website');
+
+// Route::post('/w', [App\Http\Controllers\woocomerController::class, 'store'])->name('website');
+// Route::get('/website/{{website}}/edit', [App\Http\Controllers\woocomerController::class, 'edit']);
+
+Route::resource('website', 'App\Http\Controllers\woocomerController');
+
+Route::resource('menu', 'App\Http\Controllers\menuController');

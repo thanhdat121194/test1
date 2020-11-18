@@ -33,7 +33,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li>
+                        <a class="navbar-brand" href="{{ url('/website') }}">
+                            Website
+                        </a>
+                    
+                        </li>
+                        <li>
+                        <a class="navbar-brand" href="{{ route('menu.index') }}">
+                               Menu
+                        </a>
 
+                        </li>
+
+
+
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->

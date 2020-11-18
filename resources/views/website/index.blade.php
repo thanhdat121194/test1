@@ -27,7 +27,7 @@
                             <td>{{ $item->consumer_key }}</td>
                             <td>{{ $item->consumer_secret }}</td>
                             <td>
-                                <form action="" method="GET">
+                            <form action="{{ route('website.edit', $item->id) }}" method="GET">
                                     <button class="btn btn-danger text-light">Edytuj</button>
                                 </form>
 
@@ -46,7 +46,7 @@
             <h3 class="card-header text-light text-center bg-primary">New Website</h3>
             <div class="card-body">
                 {{-- } --}}
-        <form action="http://localhost/testthailong/public/w" method="post">
+        <form action="{{ route('website.store') }}" method="post">
                     @csrf
                     <div class="row form-group">
                         <div class="col-md-2 col-sm-2 col-lg-2">Nazwa</div>

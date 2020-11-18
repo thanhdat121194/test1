@@ -22,10 +22,10 @@ class woocomerController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(\App\Models\Woocomerce $woocomerce)
+    public function index(Woocomerce $woocomerce)
     {
         // $websites = Woocommerce::all();
-        $woocomerce = \App\Models\Woocomerce::all();
+        $woocomerce = Woocomerce::all();
         return view('website.index',compact('woocomerce'));
     }
 
@@ -36,7 +36,7 @@ class woocomerController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -48,9 +48,9 @@ class woocomerController extends Controller
     public function store(Request $request)
     {
         $woo = new  Woocomerce;
-        $woo->name=  $request->input('name');;
-        $woo->url= $request->input('url');;
-        $woo->consumer_key= $request->input('key');;
+        $woo->name=  $request->input('name');
+        $woo->url= $request->input('url');
+        $woo->consumer_key= $request->input('key');
         $woo->consumer_secret=  $request->input('secret');
     //    dd($request->all());
         $woo->save($request->all());
@@ -75,9 +75,13 @@ class woocomerController extends Controller
      * @param  \App\Models\Woocomerce  $woocomerce
      * @return \Illuminate\Http\Response
      */
-    public function edit(Woocomerce  $woocomerce)
+    public function edit($id)
     {
-        return view('website.index');
+
+        $woocomerce = \App\Models\Woocomerce::find($id);
+        
+
+        return view('website.edit',compact('woocomerce'));
     }
 
     /**
@@ -87,9 +91,25 @@ class woocomerController extends Controller
      * @param  \App\Models\Woocomerce  $woocomerce
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Woocomerce $woocomerce)
+    public function update(Request $request, $id)
     {
-        //
+        // $woo = new  Woocomerce;
+        // $woo->name=  $request->input('name');
+        // $woo->url= $request->input('url');
+        // $woo->consumer_key= $request->input('key');
+        // $woo->consumer_secret=  $request->input('secret');
+
+        
+        $woocomerce = \App\Models\Woocomerce::find($id);
+        // $woocomerce->update([
+        //     'url' => $request->url,
+        //      'consumer_key' => $request->key,
+        //       'consumer_secret' => $request->secret,
+        //       'name' => $request->name]);
+        // dd($woocomerce);
+        $woocomerce->update($request->all());
+        return redirect("/website");
+     
     }
 
     /**
